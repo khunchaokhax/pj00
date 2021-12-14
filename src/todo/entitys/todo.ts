@@ -12,7 +12,7 @@ export class Todo {
     @Column()
     lastname: string
 
-    @ManyToOne(() => Category, category => category.todos)
+    @ManyToOne(() => Category, category => category.todos, { onDelete: 'SET NULL' })
     category: Category
 
 }

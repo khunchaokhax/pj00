@@ -1,6 +1,9 @@
-import { Body, Controller, Get, Post, Param, Put, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put, Delete, Query } from '@nestjs/common';
 import { identity } from 'rxjs';
 import { Category } from 'src/category/entitys/category';
+import { todoModified } from 'src/category/types/todoModified.type';
+import { TodoWithCategory } from 'src/category/types/todoWithCategory.type';
+import { Todo } from './entitys/todo';
 import { TodoService } from './todo.service';
 
 @Controller('todo')
@@ -22,13 +25,43 @@ export class TodoController {
         console.log(name);
 
         await this.todoService.create(name, lastname)
-        return '1234'
+        return 'เพิ่ม todo แล้ว'
     }
 
+    // @Get()
+    // async getAll() {
+    //     const todos = await this.todoService.findAll()
+    //     return todos
+    // }
+
     @Get()
-    async getAll() {
-        const todos = await this.todoService.findAll()
-        return todos
+    async getTodo(
+        @Query('category')
+        category
+    ): Promise<TodoWithCategory[]> {
+        const todos = await this.todoService.getTodo(category)
+        // const todosRet: any = [];
+        // for (let i = 0; i < todo.length; i++) {
+        //     const res = {
+        //         id: todo[i].id,
+        //         name: todo[i].name,
+        //         lastname: todo[i].lastname,
+        //         categoryId: todo[i].category.categoryId,
+        //         categoryName: todo[i].category.categoryName
+        //     }
+        //     todosRet.push(res)
+        // }
+        // return todosRet
+        const todosRet = todos.map((todo) => {
+            return {
+                id: todo.id,
+                name: todo.name,
+                lastname: todo.lastname,
+                categoryId: todo.category.categoryId,
+                categoryName: todo.category.categoryName,
+            }
+        })
+        return todosRet
     }
 
     @Get(':id')
@@ -81,4 +114,7 @@ export class TodoController {
         const todo = await this.todoService.CategoryToTodo(todoId)
         return todo
     }
+
+
 }
+

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
+import { TodoWithCategory } from 'src/category/types/todoWithCategory.type';
 import { Connection, Repository } from 'typeorm';
 import { Todo } from './entitys/todo';
 
@@ -76,5 +77,17 @@ export class TodoService {
         // console.log(query.getQuery());
         const todo = await query.getOne()
         return todo
+    }
+
+    async getTodo(id) {
+        // const res = await this.todoRepository.findOne({
+        //     id: id
+        // })
+        // return res
+        const query = this.todoRepository.createQueryBuilder('todo')
+        query.leftJoinAndSelect('todo.category', 'category')
+        query.where('category.categoryId = :categoryId', { categoryId: id },)
+        return query.getMany()
+
     }
 }
