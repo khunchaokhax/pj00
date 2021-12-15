@@ -1,7 +1,8 @@
-import { Controller, Body, Post, Put, Query, Param, Get, Delete } from '@nestjs/common';
+import { Controller, Body, Post, Put, Query, Param, Get, Delete, UseGuards } from '@nestjs/common';
 import { get } from 'http';
 import { identity } from 'rxjs';
 import { Todo } from 'src/todo/entitys/todo';
+import { AuthGuard } from 'src/todo/guards/test.guard';
 import { TodoService } from 'src/todo/todo.service';
 import { CategoryService } from './category.service';
 import { Category } from './entitys/category';
@@ -33,6 +34,7 @@ export class CategoryController {
     }
 
     @Get(':categoryId')
+    @UseGuards(AuthGuard)
     async getOne(
         @Param('categoryId')
         categoryId: string

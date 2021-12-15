@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Post, Param, Put, Delete, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Put, Delete, Query, UseGuards } from '@nestjs/common';
 import { identity } from 'rxjs';
 import { Category } from 'src/category/entitys/category';
 import { todoModified } from 'src/category/types/todoModified.type';
 import { TodoWithCategory } from 'src/category/types/todoWithCategory.type';
 import { Todo } from './entitys/todo';
+import { AuthGuard } from './guards/test.guard';
 import { TodoService } from './todo.service';
 
 @Controller('todo')
