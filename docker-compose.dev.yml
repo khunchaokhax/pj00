@@ -1,0 +1,11 @@
+version: '3.3'
+
+services:
+  todo1:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5000:3000
+    volumes:
+      - ./src:/home/node/src

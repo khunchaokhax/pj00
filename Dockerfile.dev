@@ -1,0 +1,10 @@
+FROM node:14-alpine
+
+USER node
+WORKDIR /home/node
+
+COPY . /home/node
+
+RUN npm i
+
+CMD ["npm","run","start:dev"]

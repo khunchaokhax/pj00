@@ -1,0 +1,8 @@
+version: '3.3'
+
+services:
+  todo:
+    build: . 
+    ports:
+      - 5000:3000
+    command: ["npm", "run","start:prod"]
