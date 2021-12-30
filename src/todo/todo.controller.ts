@@ -38,31 +38,35 @@ export class TodoController {
     @Get()
     async getTodo(
         @Query('category')
-        category
+        category,
     ) {
-        const todos = await this.todoService.getTodo(category)
-        // const todosRet: any = [];
-        // for (let i = 0; i < todo.length; i++) {
-        //     const res = {
-        //         id: todo[i].id,
-        //         name: todo[i].name,
-        //         lastname: todo[i].lastname,
-        //         categoryId: todo[i].category.categoryId,
-        //         categoryName: todo[i].category.categoryName
-        //     }
-        //     todosRet.push(res)
-        // }
-        // return todosRet
-        const todosRet = todos.map((todo) => {
-            return {
-                id: todo.id,
-                name: todo.name,
-                lastname: todo.lastname,
-                categoryId: todo.category.categoryId,
-                categoryName: todo.category.categoryName,
-            }
-        })
-        return { todos: todosRet }
+        if (category) {
+            const todos = await this.todoService.getTodo(category)
+            // const todosRet: any = [];
+            // for (let i = 0; i < todo.length; i++) {
+            //     const res = {
+            //         id: todo[i].id,
+            //         name: todo[i].name,
+            //         lastname: todo[i].lastname,
+            //         categoryId: todo[i].category.categoryId,
+            //         categoryName: todo[i].category.categoryName
+            //     }
+            //     todosRet.push(res)
+            // }
+            // return todosRet
+            const todosRet = todos.map((todo) => {
+                return {
+                    id: todo.id,
+                    name: todo.name,
+                    lastname: todo.lastname,
+                    categoryId: todo.category.categoryId,
+                    categoryName: todo.category.categoryName,
+                }
+            })
+            return { todos: todosRet }
+        }
+        const todos = await this.todoService.findAll()
+        return todos
     }
 
     @Get(':id')

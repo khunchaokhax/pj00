@@ -88,6 +88,5 @@ export class TodoService {
         query.leftJoinAndSelect('todo.category', 'category')
         query.where('category.categoryId = :categoryId', { categoryId: id },)
         return query.getMany()
-
     }
 }
