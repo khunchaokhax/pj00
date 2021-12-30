@@ -30,7 +30,7 @@ export class CategoryController {
     @Get()
     async getAll() {
         const category = await this.categoryService.findAll()
-        return category
+        return { category }
     }
 
     @Get(':categoryId')

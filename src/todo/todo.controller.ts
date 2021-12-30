@@ -39,7 +39,7 @@ export class TodoController {
     async getTodo(
         @Query('category')
         category
-    ): Promise<TodoWithCategory[]> {
+    ) {
         const todos = await this.todoService.getTodo(category)
         // const todosRet: any = [];
         // for (let i = 0; i < todo.length; i++) {
@@ -62,7 +62,7 @@ export class TodoController {
                 categoryName: todo.category.categoryName,
             }
         })
-        return todosRet
+        return { todos: todosRet }
     }
 
     @Get(':id')
