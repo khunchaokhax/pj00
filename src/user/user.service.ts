@@ -20,4 +20,3 @@ export class UserService {
         return this.userRepository.findOne(condition)
     }
 }
-

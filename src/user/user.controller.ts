@@ -1,9 +1,9 @@
 import { BadRequestException, Body, Controller, Get, Post, Req, Res, UnauthorizedException } from '@nestjs/common';
-import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { response, Response } from 'express';
+import { Response } from 'express';
 import { Request } from "express"
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
