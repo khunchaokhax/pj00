@@ -26,7 +26,7 @@ export class UserController {
             username,
             password: hashedPassword
         });
-        delete user.password;
+        // delete user.password;
 
         return user;
     }
