@@ -9,3 +9,15 @@ services:
       - 5000:3000
     volumes:
       - ./src:/home/node/src
+    depends_on:
+      - todo-db
+  todo-db:
+    build:
+      context: database
+      dockerfile: Dockerfile
+    ports:
+     - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d/:ro
